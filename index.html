@@ -1,1 +1,685 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book private one-day and multi-day Sri Lanka tours with a local guide. Choose attractions, vehicle type, and dates in one place." />
+  <title>Ceylon Compass | Sri Lanka Tour Guide</title>
+  <style>
+    :root {
+      --bg: #f4f8fb;
+      --surface: #ffffff;
+      --surface-muted: #eef3f7;
+      --text: #153047;
+      --muted: #4d6173;
+      --primary: #0a7c6f;
+      --primary-strong: #04655a;
+      --accent: #f3b144;
+      --border: #d5e1ea;
+      --shadow: 0 10px 28px rgba(14, 45, 65, 0.1);
+      --radius: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+      line-height: 1.55;
+      scroll-behavior: smooth;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .site-wrapper {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(244, 248, 251, 0.88);
+      border-bottom: 1px solid rgba(21, 48, 71, 0.08);
+    }
+
+    .nav {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--text);
+      background: var(--surface);
+      outline: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.2rem;
+    }
+
+    .panel {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .hero-main {
+      padding: clamp(1.4rem, 2vw, 2.4rem);
+      background: linear-gradient(135deg, #d9f6f1, #f4f8fb 52%, #fff4e2);
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(1.7rem, 3vw, 2.75rem);
+      max-width: 16ch;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(10, 124, 111, 0.12);
+      color: var(--primary-strong);
+      font-weight: 600;
+      font-size: 0.86rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.35rem;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      padding: 0.65rem 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--primary-strong);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .hero-side {
+      padding: 1.25rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .info-item {
+      padding: 0.8rem;
+      border-radius: var(--radius-sm);
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+    }
+
+    main section {
+      margin-top: 1.2rem;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .cars-grid,
+    .attractions-grid,
+    .tours-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .card h3 {
+      font-size: 1.06rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .pill {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.56rem;
+    }
+
+    .attraction-select {
+      margin-top: 0.2rem;
+      padding: 0.56rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .attraction-select[aria-pressed="true"] {
+      background: rgba(10, 124, 111, 0.12);
+      color: var(--primary-strong);
+      border-color: rgba(10, 124, 111, 0.35);
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0.85rem;
+    }
+
+    .booking-form {
+      padding: 1rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    label {
+      font-weight: 650;
+      font-size: 0.92rem;
+    }
+
+    input,
+    textarea,
+    select {
+      font: inherit;
+      padding: 0.68rem 0.72rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    .attraction-select:focus-visible,
+    .btn:focus-visible {
+      outline: 3px solid rgba(10, 124, 111, 0.25);
+      outline-offset: 1px;
+    }
+
+    .booking-summary {
+      padding: 1rem;
+      background: linear-gradient(180deg, #ffffff, #eff7f5);
+    }
+
+    .summary-box {
+      padding: 0.9rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #fff;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .summary-list {
+      margin: 0;
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin: 1.6rem 0 0.7rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .booking,
+      .cars-grid,
+      .attractions-grid,
+      .tours-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero {
+        align-items: stretch;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero,
+      .booking,
+      .cars-grid,
+      .attractions-grid,
+      .tours-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav ul {
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav" aria-label="Primary">
+      <a href="#top" class="logo">Ceylon Compass</a>
+      <ul>
+        <li><a href="#guide">Guide</a></li>
+        <li><a href="#cars">Cars</a></li>
+        <li><a href="#attractions">Attractions</a></li>
+        <li><a href="#booking">Booking</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="site-wrapper" id="top">
+    <section class="hero">
+      <article class="hero-main panel" aria-labelledby="hero-heading">
+        <p class="tag">Private Sri Lanka Experiences</p>
+        <h1 id="hero-heading">Modern one-page website for your local tour guide business.</h1>
+        <p>
+          Welcome your guests with a clean and trust-building layout. Show your profile, available vehicles,
+          popular attractions, and easy booking in one place that works great on desktop and mobile.
+        </p>
+        <div class="tag-row" aria-label="Site highlights">
+          <span class="tag">Responsive layout</span>
+          <span class="tag">Accessible forms</span>
+          <span class="tag">One attraction = one day</span>
+          <span class="tag">Fast booking flow</span>
+        </div>
+        <div class="cta-row">
+          <a href="#booking" class="btn btn-primary">Check availability</a>
+          <a href="#attractions" class="btn btn-secondary">Browse attractions</a>
+        </div>
+      </article>
+
+      <aside class="hero-side panel" id="guide" aria-labelledby="guide-heading">
+        <h2 id="guide-heading">About the Guide</h2>
+        <p>
+          <strong>Kasun Perera</strong> — licensed local driver-guide with 8+ years of experience, fluent in English,
+          Sinhala, and Russian. Focused on safe, friendly, and flexible private tours.
+        </p>
+        <div class="info-list">
+          <div class="info-item"><strong>Base:</strong> Colombo & airport pickup</div>
+          <div class="info-item"><strong>Style:</strong> private, slow-travel, family-friendly</div>
+          <div class="info-item"><strong>Availability:</strong> all year with custom itinerary support</div>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <section id="cars">
+        <div class="section-head">
+          <h2>Available cars for tours</h2>
+          <p>Choose the comfort level that matches your route and group size.</p>
+        </div>
+        <div class="grid cars-grid">
+          <article class="card">
+            <h3>Compact Sedan</h3>
+            <p>Best for couples and short scenic routes with low fuel footprint.</p>
+            <div class="meta">
+              <span class="pill">2 guests + luggage</span>
+              <span class="pill">A/C</span>
+              <span class="pill">City + intercity</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Comfort SUV</h3>
+            <p>Ideal for long drives to tea plantations, temples, and hill country roads.</p>
+            <div class="meta">
+              <span class="pill">4 guests</span>
+              <span class="pill">A/C + Wi‑Fi</span>
+              <span class="pill">Extra legroom</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Family Van</h3>
+            <p>Spacious and practical for group adventures with beach and safari combinations.</p>
+            <div class="meta">
+              <span class="pill">7 guests</span>
+              <span class="pill">A/C</span>
+              <span class="pill">Child seat on request</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="attractions">
+        <div class="section-head">
+          <h2>Pick attractions (1 attraction = 1 full day)</h2>
+          <p>Tap to add attractions into your trip request.</p>
+        </div>
+        <div class="grid attractions-grid" id="attractionCards" aria-live="polite">
+          <article class="card" data-attraction="Safari in Yala">
+            <h3>Safari</h3>
+            <p>Spot elephants, leopards, and birdlife in Sri Lanka’s famous national parks.</p>
+            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+          </article>
+          <article class="card" data-attraction="Tea plantation in Nuwara Eliya">
+            <h3>Tea Plantation</h3>
+            <p>Visit tea estates and factories in cool highlands, with scenic train views.</p>
+            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+          </article>
+          <article class="card" data-attraction="Mountain trekking in Ella">
+            <h3>Trekking</h3>
+            <p>Hike small peaks and viewpoints for sunrise and panoramic valley landscapes.</p>
+            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+          </article>
+          <article class="card" data-attraction="South coast beach day">
+            <h3>Beach</h3>
+            <p>Relax, swim, and enjoy sunset food spots along the tropical coastline.</p>
+            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+          </article>
+          <article class="card" data-attraction="Buddha temple heritage tour">
+            <h3>Buddha Temple</h3>
+            <p>Explore sacred temples and cultural sites with respectful local guidance.</p>
+            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+          </article>
+          <article class="card" data-attraction="Sigiriya + village experience">
+            <h3>Culture & Village</h3>
+            <p>Climb Sigiriya and discover authentic local village life and cuisine.</p>
+            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="tour-examples">
+        <div class="section-head">
+          <h2>Example tours (to be updated after you share details)</h2>
+          <p>Placeholders ready for your real packages.</p>
+        </div>
+        <div class="grid tours-grid">
+          <article class="card">
+            <h3>2-Day Coastal Relax</h3>
+            <p>Beach + temple with sunset seafood stop.</p>
+          </article>
+          <article class="card">
+            <h3>3-Day Nature Escape</h3>
+            <p>Tea plantation + trekking + safari adventure.</p>
+          </article>
+          <article class="card">
+            <h3>4-Day Heritage Route</h3>
+            <p>Temples, village culture, Sigiriya, and local cuisine.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="booking">
+        <div class="section-head">
+          <h2>Calendar & booking request</h2>
+          <p>Choose a start date, select attractions, and send your custom itinerary.</p>
+        </div>
+
+        <div class="booking">
+          <form class="panel booking-form" aria-describedby="bookingHelp">
+            <p id="bookingHelp">Your end date is calculated automatically from selected attractions.</p>
+
+            <div class="field">
+              <label for="travelerName">Full name</label>
+              <input id="travelerName" name="travelerName" type="text" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="startDate">Tour start date</label>
+              <input id="startDate" name="startDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="carType">Preferred vehicle</label>
+              <select id="carType" name="carType" required>
+                <option value="">Select vehicle</option>
+                <option>Compact Sedan</option>
+                <option>Comfort SUV</option>
+                <option>Family Van</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="note">Trip notes</label>
+              <textarea id="note" name="note" rows="4" placeholder="Hotel name, airport pickup, child seat, dietary preferences..."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Send booking request</button>
+          </form>
+
+          <aside class="panel booking-summary" aria-live="polite">
+            <h3>Your current plan</h3>
+            <div class="summary-box">
+              <p><strong>Selected attractions:</strong> <span id="daysCount">0</span> day(s)</p>
+              <p><strong>Start date:</strong> <span id="summaryStart">—</span></p>
+              <p><strong>Estimated end date:</strong> <span id="summaryEnd">—</span></p>
+              <p><strong>Route preview:</strong></p>
+              <ol class="summary-list" id="summaryList">
+                <li>Select attractions above to build your trip.</li>
+              </ol>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Ceylon Compass Tours · Designed for modern desktop and mobile booking.
+    </footer>
+  </div>
+
+  <script>
+    const attractionCards = document.querySelectorAll('#attractionCards .card');
+    const summaryList = document.getElementById('summaryList');
+    const daysCount = document.getElementById('daysCount');
+    const startDateInput = document.getElementById('startDate');
+    const summaryStart = document.getElementById('summaryStart');
+    const summaryEnd = document.getElementById('summaryEnd');
+
+    const selectedAttractions = [];
+
+    function formatDate(isoDate) {
+      if (!isoDate) return '—';
+      const date = new Date(isoDate + 'T00:00:00');
+      return new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date);
+    }
+
+    function calculateEndDate(startIso, selectedDays) {
+      if (!startIso || selectedDays < 1) return '—';
+      const date = new Date(startIso + 'T00:00:00');
+      date.setDate(date.getDate() + selectedDays - 1);
+      const endIso = date.toISOString().slice(0, 10);
+      return formatDate(endIso);
+    }
+
+    function renderSummary() {
+      daysCount.textContent = String(selectedAttractions.length);
+      summaryStart.textContent = formatDate(startDateInput.value);
+      summaryEnd.textContent = calculateEndDate(startDateInput.value, selectedAttractions.length);
+
+      summaryList.innerHTML = '';
+      if (selectedAttractions.length === 0) {
+        summaryList.innerHTML = '<li>Select attractions above to build your trip.</li>';
+        return;
+      }
+
+      selectedAttractions.forEach((name, index) => {
+        const li = document.createElement('li');
+        li.textContent = `Day ${index + 1}: ${name}`;
+        summaryList.appendChild(li);
+      });
+    }
+
+    attractionCards.forEach((card) => {
+      const button = card.querySelector('.attraction-select');
+      const attractionName = card.dataset.attraction;
+
+      button.addEventListener('click', () => {
+        const existingIndex = selectedAttractions.indexOf(attractionName);
+        const isSelected = existingIndex !== -1;
+
+        if (isSelected) {
+          selectedAttractions.splice(existingIndex, 1);
+          button.setAttribute('aria-pressed', 'false');
+          button.textContent = 'Add day';
+        } else {
+          selectedAttractions.push(attractionName);
+          button.setAttribute('aria-pressed', 'true');
+          button.textContent = 'Added';
+        }
+
+        renderSummary();
+      });
+    });
+
+    startDateInput.addEventListener('change', renderSummary);
+
+    document.querySelector('form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const message = selectedAttractions.length === 0
+        ? 'Please select at least one attraction (1 day each) before sending your request.'
+        : 'Thank you! Your booking request is ready. Connect this form to email/CRM next.';
+      alert(message);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderSummary();
+  </script>
+</body>
+</html>
