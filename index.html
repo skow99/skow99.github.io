@@ -7,16 +7,18 @@
   <title>Ceylon Compass | Sri Lanka Tour Guide</title>
   <style>
     :root {
-      --bg: #f4f8fb;
-      --surface: #ffffff;
-      --surface-muted: #eef3f7;
-      --text: #153047;
-      --muted: #4d6173;
-      --primary: #0a7c6f;
-      --primary-strong: #04655a;
-      --accent: #f3b144;
-      --border: #d5e1ea;
-      --shadow: 0 10px 28px rgba(14, 45, 65, 0.1);
+      --bg: #f8f2e6;
+      --surface: #fffdf8;
+      --surface-muted: #f5ebd8;
+      --text: #2e1e19;
+      --muted: #66463f;
+      --primary: #8d153a;
+      --primary-strong: #6f0f2f;
+      --accent: #f7b32b;
+      --accent-strong: #de9a0f;
+      --leaf: #1a7a47;
+      --border: #e7d8bb;
+      --shadow: 0 10px 26px rgba(83, 45, 23, 0.12);
       --radius: 18px;
       --radius-sm: 12px;
     }
@@ -68,8 +70,8 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(12px);
-      background: rgba(244, 248, 251, 0.88);
-      border-bottom: 1px solid rgba(21, 48, 71, 0.08);
+      background: rgba(248, 242, 230, 0.93);
+      border-bottom: 1px solid rgba(141, 21, 58, 0.15);
     }
 
     .nav {
@@ -96,6 +98,18 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.45rem 0.55rem;
+      cursor: pointer;
+      line-height: 1;
+      font-size: 1.25rem;
     }
 
     .nav a {
@@ -129,7 +143,7 @@
 
     .hero-main {
       padding: clamp(1.4rem, 2vw, 2.4rem);
-      background: linear-gradient(135deg, #d9f6f1, #f4f8fb 52%, #fff4e2);
+      background: linear-gradient(135deg, #ffe6a8, #fff9eb 48%, #f3d7c8);
       display: grid;
       gap: 1.1rem;
     }
@@ -160,7 +174,7 @@
     .tag {
       padding: 0.35rem 0.7rem;
       border-radius: 999px;
-      background: rgba(10, 124, 111, 0.12);
+      background: rgba(26, 122, 71, 0.15);
       color: var(--primary-strong);
       font-weight: 600;
       font-size: 0.86rem;
@@ -201,6 +215,13 @@
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      border-color: var(--accent-strong);
+      background: #fff4d8;
+      outline: none;
     }
 
     .hero-side {
@@ -255,6 +276,13 @@
       gap: 0.6rem;
     }
 
+    .card-photo {
+      border-radius: var(--radius-sm);
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
     .card h3 {
       font-size: 1.06rem;
     }
@@ -286,9 +314,9 @@
     }
 
     .attraction-select[aria-pressed="true"] {
-      background: rgba(10, 124, 111, 0.12);
-      color: var(--primary-strong);
-      border-color: rgba(10, 124, 111, 0.35);
+      background: rgba(26, 122, 71, 0.14);
+      color: var(--leaf);
+      border-color: rgba(26, 122, 71, 0.38);
     }
 
     .booking {
@@ -329,13 +357,31 @@
     select:focus-visible,
     .attraction-select:focus-visible,
     .btn:focus-visible {
-      outline: 3px solid rgba(10, 124, 111, 0.25);
+      outline: 3px solid rgba(141, 21, 58, 0.3);
       outline-offset: 1px;
     }
 
     .booking-summary {
       padding: 1rem;
-      background: linear-gradient(180deg, #ffffff, #eff7f5);
+      background: linear-gradient(180deg, #fffdf8, #f8edd7);
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .gallery-card img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .gallery-card p {
+      padding: 0.8rem 1rem 1rem;
     }
 
     .summary-box {
@@ -369,6 +415,10 @@
         grid-template-columns: 1fr 1fr;
       }
 
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
       .hero {
         align-items: stretch;
       }
@@ -384,11 +434,42 @@
       }
 
       .nav {
-        align-items: flex-start;
+        align-items: center;
+        position: relative;
       }
 
       .nav ul {
-        justify-content: flex-end;
+        display: none;
+        position: absolute;
+        right: 1rem;
+        top: calc(100% + 0.45rem);
+        width: min(88vw, 280px);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        padding: 0.65rem;
+        z-index: 30;
+      }
+
+      .nav ul.open {
+        display: grid;
+      }
+
+      .nav li {
+        width: 100%;
+      }
+
+      .nav li a {
+        display: block;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -397,10 +478,13 @@
   <header>
     <nav class="nav" aria-label="Primary">
       <a href="#top" class="logo">Ceylon Compass</a>
-      <ul>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open section menu">☰</button>
+      <ul id="navMenu">
         <li><a href="#guide">Guide</a></li>
         <li><a href="#cars">Cars</a></li>
         <li><a href="#attractions">Attractions</a></li>
+        <li><a href="#cozy-gallery">Island moments</a></li>
+        <li><a href="#tour-examples">Tours</a></li>
         <li><a href="#booking">Booking</a></li>
       </ul>
     </nav>
@@ -449,6 +533,7 @@
         </div>
         <div class="grid cars-grid">
           <article class="card">
+            <img class="card-photo" src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=900&q=80" alt="Compact car near palm trees in Sri Lanka" loading="lazy" />
             <h3>Compact Sedan</h3>
             <p>Best for couples and short scenic routes with low fuel footprint.</p>
             <div class="meta">
@@ -459,6 +544,7 @@
           </article>
 
           <article class="card">
+            <img class="card-photo" src="https://images.unsplash.com/photo-1556122071-e404eaedb77f?auto=format&fit=crop&w=900&q=80" alt="SUV parked by a mountain road" loading="lazy" />
             <h3>Comfort SUV</h3>
             <p>Ideal for long drives to tea plantations, temples, and hill country roads.</p>
             <div class="meta">
@@ -469,6 +555,7 @@
           </article>
 
           <article class="card">
+            <img class="card-photo" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80" alt="Family van driving through a tropical route" loading="lazy" />
             <h3>Family Van</h3>
             <p>Spacious and practical for group adventures with beach and safari combinations.</p>
             <div class="meta">
@@ -536,6 +623,27 @@
           <article class="card">
             <h3>4-Day Heritage Route</h3>
             <p>Temples, village culture, Sigiriya, and local cuisine.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="cozy-gallery">
+        <div class="section-head">
+          <h2>Cozy island moments</h2>
+          <p>Sample travel photos to make the experience warmer and more inviting.</p>
+        </div>
+        <div class="grid gallery-grid">
+          <article class="card gallery-card">
+            <img src="https://images.unsplash.com/photo-1531201890865-fb64780d5f36?auto=format&fit=crop&w=1000&q=80" alt="Warm tea estate morning in Sri Lanka hills" loading="lazy" />
+            <p>Misty tea country mornings with quiet roads and cool air.</p>
+          </article>
+          <article class="card gallery-card">
+            <img src="https://images.unsplash.com/photo-1588080643275-9b72f4185cf5?auto=format&fit=crop&w=1000&q=80" alt="Colorful fishing boats by a golden beach" loading="lazy" />
+            <p>Soft sunsets, fishing villages, and peaceful coastlines.</p>
+          </article>
+          <article class="card gallery-card">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="Cozy couple enjoying Sri Lanka beach evening" loading="lazy" />
+            <p>Simple, cozy moments made for slow and memorable travel.</p>
           </article>
         </div>
       </section>
@@ -611,6 +719,8 @@
     const startDateInput = document.getElementById('startDate');
     const summaryStart = document.getElementById('summaryStart');
     const summaryEnd = document.getElementById('summaryEnd');
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
 
     const selectedAttractions = [];
 
@@ -669,6 +779,18 @@
     });
 
     startDateInput.addEventListener('change', renderSummary);
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
 
     document.querySelector('form').addEventListener('submit', (event) => {
       event.preventDefault();
