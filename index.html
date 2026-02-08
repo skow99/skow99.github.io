@@ -127,11 +127,55 @@
       outline: none;
     }
 
+    .hero-banner {
+      position: relative;
+      margin-top: 1rem;
+      border-radius: calc(var(--radius) + 6px);
+      overflow: hidden;
+      min-height: clamp(250px, 40vw, 430px);
+      background-image:
+        linear-gradient(110deg, rgba(14, 48, 52, 0.68), rgba(26, 122, 71, 0.22) 42%, rgba(141, 21, 58, 0.35)),
+        linear-gradient(to top, rgba(248, 242, 230, 0.92), rgba(248, 242, 230, 0.15) 36%, rgba(248, 242, 230, 0)),
+        url("https://images.unsplash.com/photo-1682687982167-d7fb3ed8541d?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center 32%;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: end;
+      padding: clamp(1.1rem, 3.2vw, 2rem);
+    }
+
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.22), transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-banner-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      background: rgba(255, 253, 248, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(3px);
+      border-radius: var(--radius-sm);
+      padding: clamp(0.85rem, 2vw, 1.2rem);
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .hero-banner-copy h1 {
+      max-width: 20ch;
+    }
+
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 1.25rem;
-      margin-top: 1.2rem;
+      margin-top: 1.05rem;
     }
 
     .panel {
@@ -422,6 +466,11 @@
       .hero {
         align-items: stretch;
       }
+
+      .hero-banner {
+        min-height: clamp(230px, 45vw, 360px);
+        background-position: center;
+      }
     }
 
     @media (max-width: 720px) {
@@ -471,6 +520,10 @@
       .gallery-grid {
         grid-template-columns: 1fr;
       }
+
+      .hero-banner-copy {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -491,13 +544,21 @@
   </header>
 
   <div class="site-wrapper" id="top">
+    <section class="hero-banner" aria-labelledby="hero-heading">
+      <div class="hero-banner-copy">
+        <p class="tag">Explore Sri Lanka with Ceylon Compass</p>
+        <h1 id="hero-heading">From ancient culture to tropical coastlines — your journey starts here.</h1>
+        <p>Handpicked private tours with a local driver-guide, customized around your pace, interests, and dates.</p>
+      </div>
+    </section>
+
     <section class="hero">
-      <article class="hero-main panel" aria-labelledby="hero-heading">
+      <article class="hero-main panel" aria-labelledby="hero-highlights-heading">
         <p class="tag">Private Sri Lanka Experiences</p>
-        <h1 id="hero-heading">Modern one-page website for your local tour guide business.</h1>
+        <h2 id="hero-highlights-heading">Everything travelers need, from inspiration to booking, in one page.</h2>
         <p>
-          Welcome your guests with a clean and trust-building layout. Show your profile, available vehicles,
-          popular attractions, and easy booking in one place that works great on desktop and mobile.
+          A scenic first impression, trusted guide details, curated attractions, and a quick booking flow designed
+          for both desktop and mobile travelers.
         </p>
         <div class="tag-row" aria-label="Site highlights">
           <span class="tag">Responsive layout</span>
