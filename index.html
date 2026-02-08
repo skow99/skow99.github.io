@@ -346,7 +346,15 @@
       padding: 0.2rem 0.56rem;
     }
 
-    .attraction-select {
+    .attraction-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .attraction-select,
+    .attraction-remove {
       margin-top: 0.2rem;
       padding: 0.56rem;
       border-radius: var(--radius-sm);
@@ -357,10 +365,36 @@
       cursor: pointer;
     }
 
-    .attraction-select[aria-pressed="true"] {
-      background: rgba(26, 122, 71, 0.14);
+    .attraction-select {
+      background: rgba(26, 122, 71, 0.1);
       color: var(--leaf);
-      border-color: rgba(26, 122, 71, 0.38);
+      border-color: rgba(26, 122, 71, 0.35);
+    }
+
+    .attraction-remove {
+      background: rgba(141, 21, 58, 0.08);
+      color: var(--primary-strong);
+      border-color: rgba(141, 21, 58, 0.3);
+    }
+
+    .day-counter {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .vehicle-card {
+      cursor: pointer;
+    }
+
+    .vehicle-card .vehicle-select {
+      width: 100%;
+    }
+
+    .vehicle-card.selected {
+      border-color: rgba(26, 122, 71, 0.45);
+      box-shadow: 0 10px 26px rgba(26, 122, 71, 0.2);
     }
 
     .booking {
@@ -400,6 +434,7 @@
     textarea:focus-visible,
     select:focus-visible,
     .attraction-select:focus-visible,
+    .attraction-remove:focus-visible,
     .btn:focus-visible {
       outline: 3px solid rgba(141, 21, 58, 0.3);
       outline-offset: 1px;
@@ -563,7 +598,7 @@
         <div class="tag-row" aria-label="Site highlights">
           <span class="tag">Responsive layout</span>
           <span class="tag">Accessible forms</span>
-          <span class="tag">One attraction = one day</span>
+          <span class="tag">Flexible multi-day attractions</span>
           <span class="tag">Fast booking flow</span>
         </div>
         <div class="cta-row">
@@ -593,76 +628,103 @@
           <p>Choose the comfort level that matches your route and group size.</p>
         </div>
         <div class="grid cars-grid">
-          <article class="card">
-            <img class="card-photo" src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=900&q=80" alt="Compact car near palm trees in Sri Lanka" loading="lazy" />
-            <h3>Compact Sedan</h3>
+          <article class="card vehicle-card" data-vehicle="Toyota Corolla Axio">
+            <img class="card-photo" src="https://upload.wikimedia.org/wikipedia/commons/9/9b/2018_Toyota_Corolla_Altis_%28ZRE172R%29_sedan_%282018-10-22%29_01.jpg" alt="Toyota Corolla sedan, a common compact choice for Sri Lanka tours" loading="lazy" />
+            <h3>Toyota Corolla Axio</h3>
             <p>Best for couples and short scenic routes with low fuel footprint.</p>
             <div class="meta">
               <span class="pill">2 guests + luggage</span>
               <span class="pill">A/C</span>
               <span class="pill">City + intercity</span>
             </div>
+            <button class="btn btn-secondary vehicle-select" type="button">Choose this vehicle</button>
           </article>
 
-          <article class="card">
-            <img class="card-photo" src="https://images.unsplash.com/photo-1556122071-e404eaedb77f?auto=format&fit=crop&w=900&q=80" alt="SUV parked by a mountain road" loading="lazy" />
-            <h3>Comfort SUV</h3>
+          <article class="card vehicle-card" data-vehicle="Toyota Land Cruiser Prado">
+            <img class="card-photo" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/2018_Toyota_Land_Cruiser_Prado_GXL_%28GDJ150R%29_wagon_%282018-10-22%29_01.jpg" alt="Toyota Land Cruiser Prado SUV for premium Sri Lanka road trips" loading="lazy" />
+            <h3>Toyota Land Cruiser Prado</h3>
             <p>Ideal for long drives to tea plantations, temples, and hill country roads.</p>
             <div class="meta">
               <span class="pill">4 guests</span>
               <span class="pill">A/C + Wi‑Fi</span>
               <span class="pill">Extra legroom</span>
             </div>
+            <button class="btn btn-secondary vehicle-select" type="button">Choose this vehicle</button>
           </article>
 
-          <article class="card">
-            <img class="card-photo" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80" alt="Family van driving through a tropical route" loading="lazy" />
-            <h3>Family Van</h3>
+          <article class="card vehicle-card" data-vehicle="Toyota Hiace">
+            <img class="card-photo" src="https://upload.wikimedia.org/wikipedia/commons/5/54/Toyota_HiAce_Commuter_Diesel_2.8_2020_%2847095570812%29.jpg" alt="Toyota Hiace van used for family and group tours in Sri Lanka" loading="lazy" />
+            <h3>Toyota Hiace</h3>
             <p>Spacious and practical for group adventures with beach and safari combinations.</p>
             <div class="meta">
               <span class="pill">7 guests</span>
               <span class="pill">A/C</span>
               <span class="pill">Child seat on request</span>
             </div>
+            <button class="btn btn-secondary vehicle-select" type="button">Choose this vehicle</button>
           </article>
         </div>
       </section>
 
       <section id="attractions">
         <div class="section-head">
-          <h2>Pick attractions (1 attraction = 1 full day)</h2>
-          <p>Tap to add attractions into your trip request.</p>
+          <h2>Pick attractions (add as many days as you need)</h2>
+          <p>Tap + to add more days for each attraction, and − to remove days.</p>
         </div>
         <div class="grid attractions-grid" id="attractionCards" aria-live="polite">
           <article class="card" data-attraction="Safari in Yala">
             <h3>Safari</h3>
             <p>Spot elephants, leopards, and birdlife in Sri Lanka’s famous national parks.</p>
-            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+            <div class="attraction-controls">
+              <button class="attraction-select" type="button">+ Add day</button>
+              <button class="attraction-remove" type="button">− Remove day</button>
+              <p class="day-counter">Selected days: <span class="day-count">0</span></p>
+            </div>
           </article>
           <article class="card" data-attraction="Tea plantation in Nuwara Eliya">
             <h3>Tea Plantation</h3>
             <p>Visit tea estates and factories in cool highlands, with scenic train views.</p>
-            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+            <div class="attraction-controls">
+              <button class="attraction-select" type="button">+ Add day</button>
+              <button class="attraction-remove" type="button">− Remove day</button>
+              <p class="day-counter">Selected days: <span class="day-count">0</span></p>
+            </div>
           </article>
           <article class="card" data-attraction="Mountain trekking in Ella">
             <h3>Trekking</h3>
             <p>Hike small peaks and viewpoints for sunrise and panoramic valley landscapes.</p>
-            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+            <div class="attraction-controls">
+              <button class="attraction-select" type="button">+ Add day</button>
+              <button class="attraction-remove" type="button">− Remove day</button>
+              <p class="day-counter">Selected days: <span class="day-count">0</span></p>
+            </div>
           </article>
           <article class="card" data-attraction="South coast beach day">
             <h3>Beach</h3>
             <p>Relax, swim, and enjoy sunset food spots along the tropical coastline.</p>
-            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+            <div class="attraction-controls">
+              <button class="attraction-select" type="button">+ Add day</button>
+              <button class="attraction-remove" type="button">− Remove day</button>
+              <p class="day-counter">Selected days: <span class="day-count">0</span></p>
+            </div>
           </article>
           <article class="card" data-attraction="Buddha temple heritage tour">
             <h3>Buddha Temple</h3>
             <p>Explore sacred temples and cultural sites with respectful local guidance.</p>
-            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+            <div class="attraction-controls">
+              <button class="attraction-select" type="button">+ Add day</button>
+              <button class="attraction-remove" type="button">− Remove day</button>
+              <p class="day-counter">Selected days: <span class="day-count">0</span></p>
+            </div>
           </article>
           <article class="card" data-attraction="Sigiriya + village experience">
             <h3>Culture & Village</h3>
             <p>Climb Sigiriya and discover authentic local village life and cuisine.</p>
-            <button class="attraction-select" type="button" aria-pressed="false">Add day</button>
+            <div class="attraction-controls">
+              <button class="attraction-select" type="button">+ Add day</button>
+              <button class="attraction-remove" type="button">− Remove day</button>
+              <p class="day-counter">Selected days: <span class="day-count">0</span></p>
+            </div>
           </article>
         </div>
       </section>
@@ -691,20 +753,28 @@
       <section id="cozy-gallery">
         <div class="section-head">
           <h2>Cozy island moments</h2>
-          <p>Sample travel photos to make the experience warmer and more inviting.</p>
+          <p>Real moments from Sri Lanka's southern coast and Yala-side wildlife drives.</p>
         </div>
         <div class="grid gallery-grid">
           <article class="card gallery-card">
-            <img src="https://images.unsplash.com/photo-1531201890865-fb64780d5f36?auto=format&fit=crop&w=1000&q=80" alt="Warm tea estate morning in Sri Lanka hills" loading="lazy" />
-            <p>Misty tea country mornings with quiet roads and cool air.</p>
+            <img src="https://images.pexels.com/photos/2531236/pexels-photo-2531236.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Wide empty beach where jungle meets a lagoon in Sri Lanka" loading="lazy" />
+            <p>Aerial-style view of a wild beach and lagoon line near Yala for calm afternoon walks.</p>
           </article>
           <article class="card gallery-card">
-            <img src="https://images.unsplash.com/photo-1588080643275-9b72f4185cf5?auto=format&fit=crop&w=1000&q=80" alt="Colorful fishing boats by a golden beach" loading="lazy" />
-            <p>Soft sunsets, fishing villages, and peaceful coastlines.</p>
+            <img src="https://images.pexels.com/photos/1497585/pexels-photo-1497585.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Orange sunset over a quiet palm-lined beach" loading="lazy" />
+            <p>Golden hour on the coast with palms, sea breeze, and a long peaceful shoreline.</p>
           </article>
           <article class="card gallery-card">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="Cozy couple enjoying Sri Lanka beach evening" loading="lazy" />
-            <p>Simple, cozy moments made for slow and memorable travel.</p>
+            <img src="https://images.pexels.com/photos/133394/pexels-photo-133394.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Elephant standing in dry grassland and shrubs" loading="lazy" />
+            <p>Close elephant sightings during an early safari game drive in Yala's dry zone.</p>
+          </article>
+          <article class="card gallery-card">
+            <img src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Safari dirt road and waterhole under blue sky" loading="lazy" />
+            <p>Red-earth safari tracks passing waterholes where birds and animals gather.</p>
+          </article>
+          <article class="card gallery-card">
+            <img src="https://images.pexels.com/photos/772803/pexels-photo-772803.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Sun dropping over a calm lake with reflections" loading="lazy" />
+            <p>Evening lake reflections and dramatic skies—perfect end to a cozy island day.</p>
           </article>
         </div>
       </section>
@@ -717,7 +787,7 @@
 
         <div class="booking">
           <form class="panel booking-form" aria-describedby="bookingHelp">
-            <p id="bookingHelp">Your end date is calculated automatically from selected attractions.</p>
+            <p id="bookingHelp">Your end date is calculated automatically from the total attraction days you select.</p>
 
             <div class="field">
               <label for="travelerName">Full name</label>
@@ -738,9 +808,9 @@
               <label for="carType">Preferred vehicle</label>
               <select id="carType" name="carType" required>
                 <option value="">Select vehicle</option>
-                <option>Compact Sedan</option>
-                <option>Comfort SUV</option>
-                <option>Family Van</option>
+                <option>Toyota Corolla Axio</option>
+                <option>Toyota Land Cruiser Prado</option>
+                <option>Toyota Hiace</option>
               </select>
             </div>
 
@@ -775,6 +845,8 @@
 
   <script>
     const attractionCards = document.querySelectorAll('#attractionCards .card');
+    const vehicleCards = document.querySelectorAll('#cars .vehicle-card');
+    const carTypeSelect = document.getElementById('carType');
     const summaryList = document.getElementById('summaryList');
     const daysCount = document.getElementById('daysCount');
     const startDateInput = document.getElementById('startDate');
@@ -818,25 +890,51 @@
     }
 
     attractionCards.forEach((card) => {
-      const button = card.querySelector('.attraction-select');
+      const addButton = card.querySelector('.attraction-select');
+      const removeButton = card.querySelector('.attraction-remove');
       const attractionName = card.dataset.attraction;
+      const dayCountElement = card.querySelector('.day-count');
 
-      button.addEventListener('click', () => {
-        const existingIndex = selectedAttractions.indexOf(attractionName);
-        const isSelected = existingIndex !== -1;
-
-        if (isSelected) {
-          selectedAttractions.splice(existingIndex, 1);
-          button.setAttribute('aria-pressed', 'false');
-          button.textContent = 'Add day';
-        } else {
-          selectedAttractions.push(attractionName);
-          button.setAttribute('aria-pressed', 'true');
-          button.textContent = 'Added';
-        }
-
+      addButton.addEventListener('click', () => {
+        selectedAttractions.push(attractionName);
+        dayCountElement.textContent = String(Number(dayCountElement.textContent) + 1);
         renderSummary();
       });
+
+      removeButton.addEventListener('click', () => {
+        const existingIndex = selectedAttractions.indexOf(attractionName);
+        if (existingIndex === -1) return;
+
+        selectedAttractions.splice(existingIndex, 1);
+        dayCountElement.textContent = String(Math.max(0, Number(dayCountElement.textContent) - 1));
+        renderSummary();
+      });
+    });
+
+    function selectVehicle(vehicleName) {
+      carTypeSelect.value = vehicleName;
+      vehicleCards.forEach((vehicleCard) => {
+        const isActive = vehicleCard.dataset.vehicle === vehicleName;
+        vehicleCard.classList.toggle('selected', isActive);
+      });
+    }
+
+    vehicleCards.forEach((card) => {
+      const chooseButton = card.querySelector('.vehicle-select');
+      const vehicleName = card.dataset.vehicle;
+
+      chooseButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        selectVehicle(vehicleName);
+      });
+
+      card.addEventListener('click', () => {
+        selectVehicle(vehicleName);
+      });
+    });
+
+    carTypeSelect.addEventListener('change', () => {
+      selectVehicle(carTypeSelect.value);
     });
 
     startDateInput.addEventListener('change', renderSummary);
@@ -856,7 +954,7 @@
     document.querySelector('form').addEventListener('submit', (event) => {
       event.preventDefault();
       const message = selectedAttractions.length === 0
-        ? 'Please select at least one attraction (1 day each) before sending your request.'
+        ? 'Please select at least one attraction day before sending your request.'
         : 'Thank you! Your booking request is ready. Connect this form to email/CRM next.';
       alert(message);
     });
